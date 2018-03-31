@@ -32,24 +32,31 @@ var _co = require('co');
 
 var _co2 = _interopRequireDefault(_co);
 
+var _koaStatic = require('koa-static');
+
+var _koaStatic2 = _interopRequireDefault(_koaStatic);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // 创建app实例
-
-
-// 引入模板
-
-
-// 引入router
-const app = new _koa2.default();
-
-// 设置错误日志输出格式
 
 
 // 引入配置文件
 
 
 // 引入日志框架
+const app = new _koa2.default();
+
+// 设置错误日志输出格式
+
+
+// 引入静态资源文件
+
+
+// 引入模板
+
+
+// 引入router
 _log4js2.default.configure({
     appenders: {
         'fe-cli': {
@@ -79,7 +86,7 @@ _controllerInit2.default.getAllRouters(app, _koaSimpleRouter2.default);
 
 // 配置模板引擎
 app.context.render = _co2.default.wrap((0, _koaSwig2.default)({
-    root: _config2.default.path,
+    root: _config2.default.tplPath,
     autoescape: true,
     cache: 'memory', // disable, set to false 
     ext: 'html'
@@ -88,6 +95,9 @@ app.context.render = _co2.default.wrap((0, _koaSwig2.default)({
     // tags: tags,
     // extensions: extensions
 }));
+
+// 使用koa-static处理静态文件
+app.use((0, _koaStatic2.default)(_config2.default.staticPath));
 
 // 监听端口
 app.listen(_config2.default.port, function () {

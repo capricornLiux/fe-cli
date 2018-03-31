@@ -15,6 +15,9 @@ import controllerInit from './controllers/controllerInit';
 import render from 'koa-swig';
 import co from 'co';
 
+// 引入静态资源文件
+import serve from 'koa-static';
+
 // 创建app实例
 const app = new Koa();
 
@@ -48,7 +51,7 @@ controllerInit.getAllRouters(app, router);
 
 // 配置模板引擎
 app.context.render = co.wrap(render({
-    root: config.path,
+    root: config.tplPath,
     autoescape: true,
     cache: 'memory', // disable, set to false 
     ext: 'html',
@@ -57,6 +60,9 @@ app.context.render = co.wrap(render({
     // tags: tags,
     // extensions: extensions
 }));
+
+// 使用koa-static处理静态文件
+app.use(serve(config.staticPath));
 
 // 监听端口
 app.listen(config.port, function () {

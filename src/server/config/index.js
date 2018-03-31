@@ -5,8 +5,11 @@ let config = {
     // 设置环境变量
     env: process.env.NODE_ENV,
 
-    // 设置路径
-    path: path.join(__dirname, '../views'),
+    // 设置模板引擎的路径
+    tplPath: path.join(__dirname, '../views'),
+
+    // 设置静态资源的路径
+    staticPath: path.join(__dirname, '../assets'),
 };
 
 // 测试tree-shaking
