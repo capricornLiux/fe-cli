@@ -1,25 +1,40 @@
 'use strict';
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
-var _ = _interopDefault(require('lodash'));
+var _lodash = require('lodash');
 
-// 开发/生产环境的配置文件
+var _lodash2 = _interopRequireDefault(_lodash);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 let config = {
     // 设置环境变量
-    env: "production"
+    env: process.env.NODE_ENV
 };
 
 // 测试tree-shaking
-{
-    let prodConfig = {
-        port: 8083
-    };
-
-    // 使用lodash合并devConfig和config
-    config = _.extend(config, prodConfig);
+// 开发/生产环境的配置文件
+if (false) {
+    console.log('test tree shaking');
 }
 
-var config$1 = config;
+if (process.env.NODE_ENV === 'development') {
+    let devConfig = {
+        port: 8082
 
-module.exports = config$1;
+        // 使用lodash合并devConfig和config
+    };config = _lodash2.default.extend(config, devConfig);
+}
+
+if (process.env.NODE_ENV === 'production') {
+    let prodConfig = {
+        port: 8083
+
+        // 使用lodash合并devConfig和config
+    };config = _lodash2.default.extend(config, prodConfig);
+}
+
+exports.default = config;

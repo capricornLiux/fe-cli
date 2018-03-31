@@ -9,10 +9,8 @@
     "buildnode:prod": "cross-env NODE_ENV=production gulp",
     "buildnode:conf": "cross-env NODE_ENV=config gulp",
     "buildnode:prod-opt": "yarn run builddel && yarn run buildnode:prod && yarn run buildnode:conf",
-
     "startnode:dev": "cross-env NODE_ENV=development supervisor ./build/app.js",
     "startnode:prod": "cross-env NODE_ENV=production supervisor ./build/app.js",
-    
     "builddel": "rimraf build"
   },
   "devDependencies": {
@@ -28,6 +26,7 @@
   },
   "dependencies": {
     "koa": "^2.5.0",
-    "lodash": "^4.17.5"
+    "lodash": "^4.17.5",
+    "log4js": "^2.5.3"
   }
 }
