@@ -5,12 +5,12 @@ const indexController = {
         return async(ctx, next)=>{
             // 创建数据模型实例
             const indexModel = new IndexModel();
-            console.log(indexModel);
             // 使用await获取异步数据
             const result = await indexModel.getData();
-            console.log(result);
             // 返回body内容
-            ctx.body = result;
+            // ctx.body = result;
+            // 渲染模板引擎...
+            ctx.body = await ctx.render('index', { tag: result });
         }
     }
 }

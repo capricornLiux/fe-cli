@@ -24,9 +24,20 @@ var _controllerInit = require('./controllers/controllerInit');
 
 var _controllerInit2 = _interopRequireDefault(_controllerInit);
 
+var _koaSwig = require('koa-swig');
+
+var _koaSwig2 = _interopRequireDefault(_koaSwig);
+
+var _co = require('co');
+
+var _co2 = _interopRequireDefault(_co);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // 创建app实例
+
+
+// 引入模板
 
 
 // 引入router
@@ -65,6 +76,18 @@ _errorHandler2.default.error(app, logger);
 // })
 
 _controllerInit2.default.getAllRouters(app, _koaSimpleRouter2.default);
+
+// 配置模板引擎
+app.context.render = _co2.default.wrap((0, _koaSwig2.default)({
+    root: _config2.default.path,
+    autoescape: true,
+    cache: 'memory', // disable, set to false 
+    ext: 'html'
+    // locals: locals,
+    // filters: filters,
+    // tags: tags,
+    // extensions: extensions
+}));
 
 // 监听端口
 app.listen(_config2.default.port, function () {

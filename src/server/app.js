@@ -11,6 +11,10 @@ import config from './config';
 import router from 'koa-simple-router';
 import controllerInit from './controllers/controllerInit';
 
+// 引入模板
+import render from 'koa-swig';
+import co from 'co';
+
 // 创建app实例
 const app = new Koa();
 
@@ -41,6 +45,18 @@ errorHandler.error(app, logger);
 // })
 
 controllerInit.getAllRouters(app, router);
+
+// 配置模板引擎
+app.context.render = co.wrap(render({
+    root: config.path,
+    autoescape: true,
+    cache: 'memory', // disable, set to false 
+    ext: 'html',
+    // locals: locals,
+    // filters: filters,
+    // tags: tags,
+    // extensions: extensions
+}));
 
 // 监听端口
 app.listen(config.port, function () {
