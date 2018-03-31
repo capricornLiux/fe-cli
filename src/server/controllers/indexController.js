@@ -12,6 +12,13 @@ const indexController = {
             // 渲染模板引擎...
             ctx.body = await ctx.render('index', { tag: result });
         }
+    },
+    testAction(){
+        return (ctx, next)=>{
+            ctx.body = {
+                "data": "action"
+            }
+        }
     }
 }
 

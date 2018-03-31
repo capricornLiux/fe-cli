@@ -103,3 +103,6 @@ app.use((0, _koaStatic2.default)(_config2.default.staticPath));
 app.listen(_config2.default.port, function () {
     console.log(`server at port ${_config2.default.port}`);
 });
+
+// export default app;
+module.exports = app;

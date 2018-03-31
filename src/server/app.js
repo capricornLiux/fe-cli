@@ -68,3 +68,6 @@ app.use(serve(config.staticPath));
 app.listen(config.port, function () {
     console.log(`server at port ${config.port}`)
 })
+
+// export default app;
+module.exports = app;
