@@ -5,11 +5,15 @@
   "author": "liuxin <784532927@qq.com>",
   "license": "MIT",
   "scripts": {
-    "buildnode:dev": "gulp",
+    "buildnode:dev": "yarn run builddel && cross-env NODE_ENV=development gulp",
     "buildnode:prod": "cross-env NODE_ENV=production gulp",
     "buildnode:conf": "cross-env NODE_ENV=config gulp",
-    "buildnode:prod-opt": "yarn run buildnode:prod && yarn run buildnode:conf",
-    "start": "cross-env NODE_ENV=production supervisor ./build/app.js"
+    "buildnode:prod-opt": "yarn run builddel && yarn run buildnode:prod && yarn run buildnode:conf",
+
+    "startnode:dev": "cross-env NODE_ENV=development supervisor ./build/app.js",
+    "startnode:prod": "cross-env NODE_ENV=production supervisor ./build/app.js",
+    
+    "builddel": "rimraf build"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -19,6 +23,7 @@
     "gulp-babel": "^7.0.1",
     "gulp-rollup": "^2.16.2",
     "gulp-watch": "^5.0.0",
+    "rimraf": "^2.6.2",
     "rollup-plugin-replace": "^2.0.0"
   },
   "dependencies": {
