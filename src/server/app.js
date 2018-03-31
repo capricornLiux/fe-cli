@@ -7,6 +7,10 @@ import errorHandler from './middlewares/errorHandler';
 // 引入配置文件
 import config from './config';
 
+// 引入router
+import router from 'koa-simple-router';
+import controllerInit from './controllers/controllerInit';
+
 // 创建app实例
 const app = new Koa();
 
@@ -35,6 +39,8 @@ errorHandler.error(app, logger);
 // app.use(async(ctx, next) => {
 //     ctx.body = 'hello koa!'
 // })
+
+controllerInit.getAllRouters(app, router);
 
 // 监听端口
 app.listen(config.port, function () {

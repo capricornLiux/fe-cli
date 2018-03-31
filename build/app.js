@@ -16,9 +16,20 @@ var _config = require('./config');
 
 var _config2 = _interopRequireDefault(_config);
 
+var _koaSimpleRouter = require('koa-simple-router');
+
+var _koaSimpleRouter2 = _interopRequireDefault(_koaSimpleRouter);
+
+var _controllerInit = require('./controllers/controllerInit');
+
+var _controllerInit2 = _interopRequireDefault(_controllerInit);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // 创建app实例
+
+
+// 引入router
 const app = new _koa2.default();
 
 // 设置错误日志输出格式
@@ -52,6 +63,8 @@ _errorHandler2.default.error(app, logger);
 // app.use(async(ctx, next) => {
 //     ctx.body = 'hello koa!'
 // })
+
+_controllerInit2.default.getAllRouters(app, _koaSimpleRouter2.default);
 
 // 监听端口
 app.listen(_config2.default.port, function () {
